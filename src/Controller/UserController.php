@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 class UserController extends Controller
 {
+
     /**
-     * @Route("/user", name="user")
+     * @Rest\View()
+     * @Rest\Get("/users")
      */
     public function index()
     {
-        // replace this line with your own code!
-        return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
+        $test = $this->get('doctrine.orm.entity_manager')->getRepository('App:Product')->findAll();
+
+        return $test;
     }
 }

@@ -1,7 +1,10 @@
 framework:
     
     templating:
-        engines: ['twig']     
+        engines: ['twig']
+
+    serializer:
+        enabled: true         
 
     secret: '%env(APP_SECRET)%'
     #default_locale: en
@@ -39,4 +42,13 @@ fos_user:
     user_class: App\Entity\User
     from_email:
         address: maloba.eric@gmail.com
-        sender_name: maloba.eric@gmail.com   
+        sender_name: maloba.eric@gmail.com
+
+fos_rest:
+    routing_loader:
+        include_format: false
+    view:
+        view_response_listener: true
+    format_listener:
+        rules:
+            - { path: '^/', priorities: ['json'], fallback_format: 'json' }
